@@ -3,7 +3,7 @@ public:
     int sum(string currNum,int start,int end){
         int ans=0;
         for(int i=start;i<end;i++){
-            ans+=currNum[i];
+            ans+=currNum[i]-'0';
         }
         return ans;
     }
