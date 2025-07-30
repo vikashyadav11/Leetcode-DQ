@@ -15,7 +15,7 @@ public:
             return NULL;
 
         ListNode* temp=head;
-        
+
         int len=0;
         while(temp){
             temp=temp->next;
@@ -31,8 +31,9 @@ public:
             temp=temp->next;
             cnt++;
         }
-    
+        ListNode* delNode=temp->next;
         temp->next=temp->next->next;
+        delete delNode;
         return head;
     }
 };
