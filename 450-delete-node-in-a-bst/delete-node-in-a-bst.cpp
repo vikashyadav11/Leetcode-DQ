@@ -47,8 +47,12 @@ public:
         TreeNode* lastRight=findLastRight(root->left);
         lastRight->right=rightChild;
         return root->left;
-    }TreeNode* findLastRight(TreeNode* root){
-        if(root->right==NULL)  return root;
-        return findLastRight(root->right);
+    }
+    TreeNode* findLastRight(TreeNode* root){
+        //if(root->right==NULL)  return root;
+        //return findLastRight(root->right);
+        while(root->right)
+            root=root->right;
+        return root;    
     }
 };
