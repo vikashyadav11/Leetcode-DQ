@@ -1,28 +1,46 @@
 class Solution {
 public:
-    typedef pair<char,int> P;
+
+    static bool comparator(pair<int,char> a,
+                           pair<int,char> b) {
+
+        // Same frequency -> lexicographical order
+        if(a.first == b.first)
+            return a.second < b.second;
+
+        // Higher frequency first
+        return a.first > b.first;
+    }
+
     string frequencySort(string s) {
-        vector<P>  vec(123);
-        for(char &ch:s){
-            int freq=vec[ch].second;
-            vec[ch]={ch,freq+1};
+
+        // ASCII characters
+        pair<int,char> freq[256];
+
+        // Initialize
+        for(int i = 0; i < 256; i++) {
+            freq[i] = {0, char(i)};
         }
-        auto lambda=[&](P &a, P &b){
-            return a.second > b.second;
-        };
-        sort(vec.begin(),vec.end(),lambda);
 
-        string ans="";
+        // Count frequency
+        for(char ch : s) {
+            freq[(unsigned char)ch].first++;
+        }
 
-        for(int i=0;i<123;i++){
-            if(vec[i].second > 0){
-                char ch=vec[i].first;
-                int freq=vec[i].second;
-                string temp=string(freq,ch);
+        // Sort
+        sort(freq, freq + 256, comparator);
 
-                ans+=temp;
+        // Build answer
+        string ans = "";
+
+        for(int i = 0; i < 256; i++) {
+
+            if(freq[i].first > 0) {
+
+                ans += string(freq[i].first,freq[i].second);
             }
         }
+
         return ans;
     }
 };
