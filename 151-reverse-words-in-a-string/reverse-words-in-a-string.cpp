@@ -30,7 +30,7 @@ public:
             
             // Add space before appending next word if result is not empty
             if (!result.empty()) {
-                result += " ";
+                result += ' ';
             }
             
             // Append the word to the result
