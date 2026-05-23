@@ -1,26 +1,42 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        //reverse whole string
-        reverse(s.begin(),s.end());
-        int i=0;// i will iterate through whole string
-        int l=0,r=0;
-        int n=s.length();
-        while(i<n){
-            while(i<n && s[i]!=' '){
-                s[r]=s[i];
-                i++;
-                r++;
+        // Result string to store final output
+        string result = "";
+        
+        // Pointer starting from the last character
+        int i = s.size() - 1;
+        
+        // Traverse string from right to left
+        while (i >= 0) {
+            // Skip spaces at the current position
+            while (i >= 0 && s[i] == ' ') {
+                i--;
             }
-            if(l<r){
-                reverse(s.begin()+l,s.begin()+r);
-            s[r]=' ';
-            r++;
-            l=r;
+            
+            // If pointer is out of bounds, break
+            if (i < 0) break;
+            
+            // Mark the end of the current word
+            int end = i;
+            
+            // Move left until a space or start of string is found
+            while (i >= 0 && s[i] != ' ') {
+                i--;
             }
-            i++;
+            
+            // Extract the current word
+            string word = s.substr(i + 1, end - i);
+            
+            // Add space before appending next word if result is not empty
+            if (!result.empty()) {
+                result += " ";
+            }
+            
+            // Append the word to the result
+            result += word;
         }
-        s=s.substr(0,r-1);
-        return s;
+        
+        return result;
     }
 };
