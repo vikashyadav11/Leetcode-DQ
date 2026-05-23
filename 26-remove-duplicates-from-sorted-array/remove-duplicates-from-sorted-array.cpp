@@ -1,13 +1,23 @@
 class Solution {
 public:
-    int removeDuplicates(vector<int>& arr) {
-        int i=0;
-        for(int j=1;j<arr.size();j++){
-            if(arr[j]!=arr[i]){
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.empty()) return 0;
+
+        // Pointer for the position of last unique element
+        int i = 0;
+
+        // Traverse the array starting from the second element
+        for (int j = 1; j < nums.size(); j++) {
+            // If current element is different from last unique element
+            if (nums[j] != nums[i]) {
+                // Move pointer for unique element forward
                 i++;
-                arr[i]=arr[j];
+                // Place the new unique element at the next position
+                nums[i] = nums[j];
             }
         }
-        return i+1;
+
+        // i is index of last unique element, count = i + 1
+        return i + 1;
     }
 };
