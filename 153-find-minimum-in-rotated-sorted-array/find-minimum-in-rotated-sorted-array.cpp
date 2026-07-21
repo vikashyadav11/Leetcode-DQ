@@ -1,24 +1,30 @@
 class Solution {
 public:
-    int findMin(vector<int>& arr) {
-        int n=arr.size();
-        int low=0,high=n-1,miniE=INT_MAX;
-        while(low<=high){
-            int mid=low+(high-low)/2;
-           
-            if(arr[low]<arr[high])
-                miniE=min(miniE,arr[low]);
+    int findMin(vector<int>& nums) {
+        
+        // Initialize low and high pointers
+        int low = 0, high = nums.size() - 1;
 
-            if(arr[mid]>=arr[low]){
-                miniE=min(miniE,arr[low]);
-                low=mid+1;
+        // Binary search loop
+        while (low < high) {
+
+            // Calculate mid index
+            int mid = low + (high - low) / 2;
+
+            // Check which half to discard
+            if (nums[mid] > nums[high]) {
+
+                // Minimum lies in right half
+                low = mid + 1;
+
+            } else {
+
+                // Minimum lies in left half (including mid)
+                high = mid;
             }
-            else{
-                miniE=min(miniE,arr[mid]);
-                high=mid-1;
-            }
-            
         }
-        return miniE;
+
+        // Return the minimum element
+        return nums[low];
     }
 };
